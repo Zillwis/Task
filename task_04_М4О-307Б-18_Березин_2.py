@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 import math
 import numpy as np
 from numpy.fft import fft, fftshift
@@ -28,7 +30,7 @@ c = 299792458.0
 # Размер области моделирования в метрах
 maxSize_m = 0.7
 # Дискрет по пространству
-dx = 5e-3
+dx = 1e-3
 # Размер облести моделирования в отсчетах
 maxSize = math.floor(maxSize_m / dx + 0.5)
 
@@ -56,7 +58,7 @@ eps[posL3min:] = 4.0
 mu = 1.0
 
 # Время расчета в секундах
-maxTime_s = 100e-9
+maxTime_s = 200e-9
 # Дискрет по времени
 dt = Sc * dx / c
 # Время расчета в отсчетах
@@ -71,9 +73,9 @@ flist = np.arange(-maxTime / 2 * df, maxTime / 2 * df, df)
 
 # Параметры гауссова сигнала
 # Уровень ослабления в начальный момент времени
-A_0 = 100
+A_0 = 10
 # Уровень ослабления на частоте F_max
-A_max = 100
+A_max = 70
 # Ширина спектра по уровню 0.01
 F_max = 3e9
 # Параметр "ширины" импульса
@@ -192,8 +194,8 @@ ax2.minorticks_on()
 ax2.grid()
 
 # Коэффициент отражения
-ax3.set_xlim(0.1 * Fmin, 2 * Fmax)
-ax3.set_ylim(0, 17.0)
+ax3.set_xlim( Fmin, Fmax)
+ax3.set_ylim(0, 1.0)
 ax3.set_xlabel('f, Гц')
 ax3.set_ylabel('|Г|, б/р')
 ax3.plot(flist, Gamma)
@@ -202,4 +204,5 @@ ax3.grid()
 
 plt.subplots_adjust(hspace=0.5)
 plt.show()
+
 
